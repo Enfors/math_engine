@@ -92,7 +92,10 @@ class Drill(Activity):
                                            self.question)
 
     def recv_input(self, user_input):
-        user_input = int(user_input)
+        try:
+            user_input = int(user_input)
+        except ValueError:
+            user_input = None
 
         self.num_answered += 1
 
@@ -123,8 +126,8 @@ class MultiplicationDrill(Drill):
 
     def make_question(self):
         "Store a question."
-        num_a = random.randint(2, self.limit)
-        num_b = random.randint(2, self.limit)
+        num_a = random.randint(2, self.starting_limit)
+        num_b = random.randint(2, self.starting_limit)
 
         self.question = "%d * %d" % (num_a, num_b)
         self.answer = num_a * num_b
