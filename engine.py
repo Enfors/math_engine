@@ -61,6 +61,7 @@ class ActivityStatus(object): # pylint: disable=too-few-public-methods
     def __init__(self, output, done=False):
         self.output = output
         self.done = done
+        self.result = None
 
 
 
@@ -119,15 +120,14 @@ class Drill(Activity):
 class MultiplicationDrill(Drill):
     "A Drill of type Multiplication."
 
-    def __init__(self, user, num_questions=5, starting_limit=12, limit=12):
+    def __init__(self, user, num_questions=5, limit=12):
         super(MultiplicationDrill, self).__init__(user, num_questions)
-        self.starting_limit = starting_limit
         self.limit = limit
 
     def make_question(self):
         "Store a question."
-        num_a = random.randint(2, self.starting_limit)
-        num_b = random.randint(2, self.starting_limit)
+        num_a = random.randint(2, self.limit)
+        num_b = random.randint(2, self.limit)
 
         self.question = "%d * %d" % (num_a, num_b)
         self.answer = num_a * num_b
